@@ -1,10 +1,10 @@
-Malambito::Application.routes.draw do
-  
+Malambito::Application.routes.draw do 
+devise_for :users
   resources :posts do
-    resources :comments
+    resources :comments    
   end
 
-  get "posts/index"
+  
   root :to => "posts#index"
   
 
