@@ -1,8 +1,8 @@
 <div class="page-header">
 <h1>Malambito's Posts</h1>
-		<% if user_signed_in? %>
+		
 		</div><%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
-		<% end %>
+		
 <% @posts = Post.all(:order => "created_at DESC", :conditions => ["created_at <= ?", Time.now]) %>
 <% @posts.each do |post| %>
 <div class="post">
