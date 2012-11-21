@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Malambito</title>
+  <title>Koombea Posts</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -11,7 +11,7 @@
 <div class = "navbar navbar-fixed-top" >
 	<div class = "navbar-inner">
 		<div class="container">
-			<a class = "brand" href="#" >Malambito</a>
+			<a class = "brand" href="#" >Koombea Posts</a>
 			<ul class="nav">
 				<li><%= link_to "All Posts", posts_path%></li>
 			</ul>
@@ -20,8 +20,10 @@
 				<li><%= link_to current_user.full_name, edit_user_registration_path %></li>
 				<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 				<% else %>
-				<li><%= link_to "Register", new_user_registration_path%></li>
 				<li><%= link_to "Log in", user_session_path%></li>
+				
+				<li><%= link_to "Register", new_user_registration_path%></li>
+				<li><%= link_to	content_tag(:i, nil, :class => "icon-facebook-sign icon-large") + " Sign in with facebook",user_omniauth_authorize_path(:facebook) %></li>
 				<% end %>
 			</ul>
 		</div>

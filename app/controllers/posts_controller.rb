@@ -1,5 +1,15 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create, :destroy, :update, :edit]
+  before_filter :authenticate_auth, :only => [:destroy, :update, :edit]
+
+  def authenticate_auth
+    @post = Post.find(params[:id])
+    if current_user == @post.user 
+        true
+    else
+      redirect_to post_path(@post), alert: 'You cannot modify this post since you are not the creator of it!'
+    end
+  end
 	def index
 		@posts = Post.all
 
@@ -51,6 +61,7 @@ class PostsController < ApplicationController
 
 end
 def update
+  
     @post = Post.find(params[:id])
 
     respond_to do |format|
@@ -62,5 +73,6 @@ def update
         format.json { render json: @post.errors, post: :unprocessable_entity }
       end
     end
+ 
 end
 end

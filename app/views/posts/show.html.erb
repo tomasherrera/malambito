@@ -11,7 +11,7 @@
 <% @post.comments.each do |comment| %>
   <div class="post">
   <p>
-    <b>Commenter:</b>
+    <b>Name:</b>
     <%= comment.commenter %>
   </p>
  
@@ -19,16 +19,19 @@
     <b>Comment:</b>
     <%= comment.body %>
   </p>
+  <div id="like">
+  <%= render 'likes/like_button', :comment => @comment %>
+  </div>
 </div>
 <% end %>
  
 <h3>Add a comment:</h3>
 <%= simple_form_for([@post, @post.comments.build]) do |f| %>
   <div class="field">
-    <%= f.input :commenter %><br />    
+    <%= f.input :commenter,:label => 'Your name please' %><br />    
   </div>
   <div class="field">
-    <%= f.input :body, :input_html => {:rows => 7}%><br />    
+    <%= f.input :body,:label => 'Your comment please', :input_html => {:rows => 7}%><br />    
   </div>
   <div class="actions">
     <%= f.button :submit %>
