@@ -4,5 +4,7 @@ class Post < ActiveRecord::Base
                     :length => { :minimum => 5 }
  
   has_many :comments
+  has_many :user_comments
+  has_many :anonymous_comments
   belongs_to :user
 end

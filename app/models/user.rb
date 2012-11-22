@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   attr_accessible :user_id,:first_name, :last_name, :provider, :uid, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
   has_many :posts
+  has_many :usercomments
   has_many :likes
-  has_many :comments
   def full_name
     first_name + " " + last_name
   end

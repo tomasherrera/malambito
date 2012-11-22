@@ -1,7 +1,22 @@
 class CommentsController < ApplicationController
-	def create
+	def create    
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(params[:comment])
-    redirect_to post_path(@post)
+	    if current_user!=nil
+		    @comment = @post.user_comments.new(params[:comment])
+		    @comment.user_id = current_user.id
+		    if @comment.save
+		    	redirect_to post_path(@post)
+		    else
+		    	redirect_to post_path(@post), :alert => @comment.errors.full_messages.to_sentence
+		    end
+		else
+			@comment = @post.anonymous_comments.create(params[:comment])
+			if @comment.save
+		    	redirect_to post_path(@post)
+		    else
+		    	redirect_to post_path(@post), :alert => @comment.errors.full_messages.to_sentence
+		    end
+		end
+    
   end
 end

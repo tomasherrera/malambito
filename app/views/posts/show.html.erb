@@ -4,32 +4,40 @@
 </p>
  
 <p>  
-  <%= @post.content %>
+  <%= markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+    :autolink => true, :space_after_headers => true)
+markdown.render(@post.content).html_safe %>
 </p>
 
 <h2>Comments</h2>
 <% @post.comments.each do |comment| %>
-  <div class="post">
-  <p>
-    <b>Name:</b>
-    <%= comment.commenter %>
-  </p>
- 
-  <p>
-    <b>Comment:</b>
-    <%= comment.body %>
-  </p>
-  <div id="like">
-  <%= render 'likes/like_button', :comment => @comment %>
-  </div>
+  <% if comment.commenter==nil%>
+  <% name=comment.user.full_name %>
+  <% else %>
+  <% name=comment.commenter  %>
+  <% end %>
+  <div class="comment">
+    <div class="inner-comment">
+      <p>
+        <b>" </b>
+        <%= comment.body %><b>"</b>
+      </p>
+      <p class="comment-author">
+        <i><b>By</b>
+        <%= name %></i>
+      </p> 
+    </div>
 </div>
 <% end %>
  
 <h3>Add a comment:</h3>
 <%= simple_form_for([@post, @post.comments.build]) do |f| %>
+<% if current_user==nil %>
+
   <div class="field">
     <%= f.input :commenter,:label => 'Your name please' %><br />    
   </div>
+<% end %>
   <div class="field">
     <%= f.input :body,:label => 'Your comment please', :input_html => {:rows => 7}%><br />    
   </div>

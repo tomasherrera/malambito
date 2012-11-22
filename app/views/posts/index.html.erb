@@ -7,7 +7,7 @@
 <% @posts.each do |post| %>
 <div class="post">
   <strong> <%= link_to post.title, post %></strong>
-  <p><%= post.content %></p>
+  <p><%= post.content%></p>
   <div class="class">
   	<%="By "+ post.user.full_name + " |"%>
     <%= link_to "Posted "+time_ago_in_words(post.created_at) +" ago", post %>
