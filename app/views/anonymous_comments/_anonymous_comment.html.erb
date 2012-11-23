@@ -7,7 +7,7 @@
       <p class="comment-author">
         <i><b>By</b>
         <%= anonymous_comment.commenter %></i>
-        <%= link_to "Like", Like.create(:comment_id => comment) %>  
+        <%= link_to "Like", comment_likes_path(anonymous_comment), method: :post %>  
       </p> 
         
     </div>    
