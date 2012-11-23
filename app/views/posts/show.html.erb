@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p> 
-<p>  
-  <h1><%= @post.title %></h1>
-</p>
- 
-<p>  
-  <%= markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-    :autolink => true, :space_after_headers => true)
-markdown.render(@post.content).html_safe %>
-</p>
+<h1><%= @post.title %></h1>
+<button class="btn btn-default"><i class="icon-facebook icon-large"></i>
+<%=fb_share('382255331857879', 'http://localhost:3000/', {:name => "#{@post.title}",
+                                   :description => "#{@post.content}",
+                                   :link => "#{post_url(@post)}"     
+                                  }) %></button>
 
+<p><%= Redcarpet.new(@post.content).to_html.html_safe %>
+</p>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://localhost:3000" data-via="tomasherrera91" data-size="large" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 <h2>Comments</h2>
 <% @post.comments.each do |comment| %>
   <% if comment.commenter==nil%>
@@ -26,7 +26,8 @@ markdown.render(@post.content).html_safe %>
         <i><b>By</b>
         <%= name %></i>
       </p> 
-    </div>
+          
+    </div>    
 </div>
 <% end %>
  

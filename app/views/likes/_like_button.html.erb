@@ -1,6 +1,0 @@
-
-	<%= form_for current_user.likes.build(:comment_id => @comment.id), :remote => true do |f| %>
-		<%= f.hidden_field :comment_id %>
-		<%= f.hidden_field :user_id %>
-		<%= f.submit "Like" %>
-	<% end %>

@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(:version => 20121122193934) do
 
   create_table "likes", :force => true do |t|
     t.integer  "comment_id"
-    t.integer  "user_id",    :default => 1
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "likes", ["comment_id"], :name => "index_likes_on_comment_id"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20121122193934) do
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
-  create_table "users", :force => true do |t|
+  create_table "users", :primary_key => "user_id", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email",                  :default => "", :null => false
@@ -67,5 +67,6 @@ ActiveRecord::Schema.define(:version => 20121122193934) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["user_id"], :name => "index_users_on_user_id"
 
 end
