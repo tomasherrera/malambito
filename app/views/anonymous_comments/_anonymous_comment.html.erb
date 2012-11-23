@@ -1,0 +1,14 @@
+<div class="comment">
+    <div class="inner-comment">
+      <p>
+        <b>" </b>
+        <%= anonymous_comment.body %><b>"</b>
+      </p>
+      <p class="comment-author">
+        <i><b>By</b>
+        <%= anonymous_comment.commenter %></i>
+        <%= link_to "Like", Like.create(:comment_id => comment) %>  
+      </p> 
+        
+    </div>    
+</div>

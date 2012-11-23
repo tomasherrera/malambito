@@ -13,6 +13,8 @@
   <%=f.hidden_field :user_id, :value => current_user.id %>
   <%=f.input :title %>
   <%=f.input :content , :input_html => {:rows => 8}%>
+  <%=f.file_field :picture %>
+
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

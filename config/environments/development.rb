@@ -8,6 +8,7 @@ Malambito::Application.configure do
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -35,5 +36,7 @@ Malambito::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
 
 end

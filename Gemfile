@@ -11,6 +11,8 @@ gem 'simple_form'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'redcarpet'
+gem "mail", "2.4.4"
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 # Gems used only for assets and not required
 # in production environments by default.

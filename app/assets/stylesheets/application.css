@@ -49,3 +49,15 @@ body {
 .twitter-share-button{
 	margin: 0px;
 }
+#file {
+   display: none;
+}
+   
+.dummyfile input[type="text"] {
+   width: 120px;
+   display: inline;
+}
+.thumbnail{
+	margin-right: 10px;
+	margin-bottom: 3px;
+}

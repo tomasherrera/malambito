@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122193934) do
+ActiveRecord::Schema.define(:version => 20121123163515) do
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(:version => 20121122193934) do
 
   create_table "likes", :force => true do |t|
     t.integer  "comment_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "user_id",    :default => 1
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "likes", ["comment_id"], :name => "index_likes_on_comment_id"
@@ -39,14 +39,18 @@ ActiveRecord::Schema.define(:version => 20121122193934) do
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.integer  "user_id"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
-  create_table "users", :primary_key => "user_id", :force => true do |t|
+  create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email",                  :default => "", :null => false
@@ -63,10 +67,13 @@ ActiveRecord::Schema.define(:version => 20121122193934) do
     t.datetime "updated_at",                             :null => false
     t.string   "provider"
     t.string   "uid"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["user_id"], :name => "index_users_on_user_id"
 
 end

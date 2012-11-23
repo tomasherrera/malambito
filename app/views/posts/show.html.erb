@@ -1,38 +1,24 @@
 <h1><%= @post.title %></h1>
-<button class="btn btn-default"><i class="icon-facebook icon-large"></i>
-<%=fb_share('382255331857879', 'http://localhost:3000/', {:name => "#{@post.title}",
-                                   :description => "#{@post.content}",
-                                   :link => "#{post_url(@post)}"     
-                                  }) %></button>
+
+
+  <%= image_tag @post.picture.url(:small), :class => "thumbnail pull-left" %>
 
 <p><%= Redcarpet.new(@post.content).to_html.html_safe %>
 </p>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://localhost:3000" data-via="tomasherrera91" data-size="large" data-count="none">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<p><button class="btn btn-default"><i class="icon-facebook icon-large"></i>
+<%=fb_share('382255331857879', 'http://localhost:3000/', {:name => "#{@post.title}",
+                                   :description => "#{@post.content}",
+                                   :link => "#{post_url(@post)}"     
+                                  }) %></button></p>
 <h2>Comments</h2>
-<% @post.comments.each do |comment| %>
-  <% if comment.commenter==nil%>
-  <% name=comment.user.full_name %>
-  <% else %>
-  <% name=comment.commenter  %>
-  <% end %>
-  <div class="comment">
-    <div class="inner-comment">
-      <p>
-        <b>" </b>
-        <%= comment.body %><b>"</b>
-      </p>
-      <p class="comment-author">
-        <i><b>By</b>
-        <%= name %></i>
-      </p> 
-          
-    </div>    
-</div>
-<% end %>
- 
+<div id="comments">
+<%= render @post.comments%>
+
+</div> 
 <h3>Add a comment:</h3>
-<%= simple_form_for([@post, @post.comments.build]) do |f| %>
+<%= simple_form_for([@post, @post.comments.build], :remote => true) do |f| %>
 <% if current_user==nil %>
 
   <div class="field">

@@ -1,0 +1,14 @@
+<div class="comment">
+    <div class="inner-comment">
+      <p>
+        <b>" </b>
+        <%= user_comment.body %><b>"</b>
+      </p>
+      <p class="comment-author">
+        <i><b>By</b>
+        <%= user_comment.user.full_name%> </i>
+        <%= link_to "Like", Like.create %>  
+      </p> 
+          
+    </div>    
+</div>
