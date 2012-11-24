@@ -1,1 +1,21 @@
-<% link_to "Like", "www.google.com" %>
+<% like= current_user.likes.find_by_comment_id comment.id %>
+<div class="like-container">
+	          <% if current_user.has_like?(comment) %>
+	          	<%= 
+          			link_to(
+          				content_tag(:span, content_tag(:i, nil, :class => "icon-thumbs-down") + " Unlike"),
+          				comment_like_path(comment, like), method: :delete, remote: true, :class => "btn btn-default"
+          			)
+          		%>
+	          <%else%>          
+	          	<%=
+          			link_to(
+          				content_tag(:span, content_tag(:i, nil, :class => "icon-thumbs-up") + " Like"),
+          				comment_likes_path(comment), method: :post, remote: true, :class => "btn btn-default"
+          			)
+          		%>
+	          <%end%>
+
+
+	A <%= comment.likes.count() %> personas les gusta este comentario. 
+</div>
