@@ -7,11 +7,17 @@ class LikesController < ApplicationController
     @like.comment = @comment
     @like.user = @user
     @like.save()
+    respond_to do |format|
+      format.html {  }# index.html.erb
+      format.js {render :replace}
+      end
   end
 
   def destroy
-    like = Like.find(params[:id]).destroy
-    @comment = like.comment
-    redirect_to post_path(@post)
+    @like = Like.find(params[:id]).destroy
+    @comment = @like.comment
+    respond_to do |format|
+      format.js {render :replace}
+    end    
   end
 end

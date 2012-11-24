@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
   belongs_to :post
-  has_many :likes
+  has_many :likes, dependent: :destroy
   attr_accessible :body, :commenter, :created_at, :user_id, :comment_id
 
   validates_presence_of :body

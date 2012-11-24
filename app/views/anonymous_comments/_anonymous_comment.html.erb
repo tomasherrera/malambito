@@ -1,4 +1,4 @@
-<div class="comment">
+<div class="comment" id="comment_<%= anonymous_comment.id%>">
     <div class="inner-comment">
       <p>
         <b>" </b>
@@ -7,7 +7,9 @@
       <p class="comment-author">
         <i><b>By</b>
         <%= anonymous_comment.commenter %></i>
-        <%= link_to "Like", comment_likes_path(anonymous_comment), method: :post %>  
+        <% if user_signed_in? %>
+        <%= render :partial => "likes/like_button", :locals => {:comment => anonymous_comment}%>  
+        <%end%>
       </p> 
         
     </div>    

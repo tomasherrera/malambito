@@ -14,9 +14,9 @@ class User < ActiveRecord::Base
   def full_name
     first_name + " " + last_name
   end
-  #def has_like? comment
-   # likes.find_by_comment_id comment.id
-  #end
+  def has_like? comment
+     likes.find_by_comment_id comment.id
+  end
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   user = User.where(:provider => auth.provider, :uid => auth.uid).first
   unless user

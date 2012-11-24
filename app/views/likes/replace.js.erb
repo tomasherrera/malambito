@@ -1,0 +1,1 @@
+$('#comment_<%= @comment.id %> .like-container').replaceWith('<%= j render(:partial => "likes/like_button", :locals => {:comment => @comment}) %>');
